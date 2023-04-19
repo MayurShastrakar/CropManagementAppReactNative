@@ -5,6 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import pattern from '../../assets/pattern.png'
 import axios from 'axios';
+import { Linking } from 'react-native';
 
 const Capture = ({ navigation, route }) => {
   const getDetails = (type) => {
@@ -99,8 +100,15 @@ const Capture = ({ navigation, route }) => {
  
   }
 
+
+  //  For Riderect on the URL page
   const submit = () => {
-    alert("hello")
+    const url="https://8936-103-76-10-250.ngrok-free.app/"
+    try {
+      Linking.openURL(url);
+    } catch (error) {
+      console.log(error);
+    }
 
   }
 
@@ -125,7 +133,9 @@ const Capture = ({ navigation, route }) => {
               icon={picture == "" ? "camera" : "check"}
               mode="contained"
               theme={theme}
-              onPress={() => setModal(true)}
+              // onPress={() => setModal(true)}
+              onPress={() => submit()}
+              
               style={styles.roundButton}>
               <View style={styles.shadowProp}>
 
@@ -191,7 +201,7 @@ const theme = {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '100%',
+    height: '120%',
     display: 'flex',
   },
   patternbg: {
@@ -267,7 +277,7 @@ const styles = StyleSheet.create({
     // padding:10,
     marginLeft: 10,
     marginTop: 30,
-    // color:'black',
+    color:'white',
   },
   ImageAl: {
     width: 350,
