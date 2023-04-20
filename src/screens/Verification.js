@@ -38,7 +38,7 @@ const Verification = ({ navigation, route }) => {
                 dob: userdata[0]?.dob,
             }
 
-            fetch('https://loginserver-axse.onrender.com/singup', {
+            fetch('https://loginserver-axse.onrender.com/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ const Verification = ({ navigation, route }) => {
                 .then(res => res.json())
                 .then(data => {
                     // console.log(data);
-                    if (data.message === 'Wow.. Registered Successfully') {
+                    if (data.message === 'User Registered Successfully') {
                         alert(data.message);
                         navigation.navigate('login')
                     }
@@ -72,7 +72,7 @@ const Verification = ({ navigation, route }) => {
             <View style={styles.container1} >
                 <View style={styles.s1}>
                     <Image style={styles.logo} source={green} />
-                    <Text style={styles.h1} onPress={() => navigation.navigate('welcome')}></Text>
+                    <Text style={styles.h1} onPress={() => navigation.navigate('Welcome')}></Text>
                     <Text style={styles.small1}></Text>
                 </View>
                 <View style={styles.s2}>

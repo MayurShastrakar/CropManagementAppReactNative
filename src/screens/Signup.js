@@ -21,81 +21,8 @@ const Signup = ({
 
     const [errormsg, setErrormsg] = useState(null);
 
-    // const Sendtobackend = () => {
-    //     // console.log(fdata);
-    //     if (fdata.name == '' ||
-    //         fdata.email == '' ||
-    //         fdata.password == '' ||
-    //         fdata.cpassword == '' ||
-    //         fdata.dob == '' ||
-    //         fdata.address == '') {
-    //         setErrormsg('All fields are required');
-    //         return;
-    //     }
-    //     else {
-    //         if (fdata.password != fdata.cpassword) {
-    //             setErrormsg('Password and Confirm Password must be same');
-    //             return;
-    //         }
-    //         else {
-    //             fetch('http://localhost:3000/singup', {
-    //                 method: 'POST',
-    //                 headers: {
-    //                     'Content-Type': 'application/json'
-    //                 },
-    //                 body: JSON.stringify(fdata)
-    //             })
-    //                 .then(res => res.json()).then(
-    //                     data => {
-    //                         // console.log(data);
-    //                         if (data.error === 'Invalid Credentials') {
-    //                             // alert('Invalid Credentials')
-    //                             setErrormsg('Invalid Credentials')
-    //                         }
-    //                         else if (data.message === "Verification Code Sent to your Email") {
-    //                             // console.log(data.udata);
-    //                             alert(data.message);
-    //                             navigation.navigate('verification', { userdata: data.udata })
-    //                         }
-    //                         else {
-    //                             alert(data.message);
-    //                             navigation.navigate('verification', { userdata: data.udata })
-    //                         }
-    //                     }
-    //                 )
-    //         }
-    //     }
-    // }
-
-
-
-    // ********************************************************************
-
-    // const submit = () => {
-    //     try {
-    //         fetch('http://localhost:3000/verify', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(fdata)
-
-    //         })
-    //             .then(res => res.json())
-    //             .then(data => {
-    //                 console.log(data);
-    //                 // handle the response data here
-    //             })
-    //             .catch(error => {
-    //                 console.error(error);
-    //                 // handle any errors here
-    //             });
-    //     } catch (error) {
-    //         console.log('====================================');
-    //         console.log(error);
-    //         console.log('====================================');
-    //     }
-    // }
+  
+   
     // *******************************************************************************
 
     const register = () => {
@@ -112,7 +39,7 @@ const Signup = ({
                 return;
             }
             else {
-                fetch('https://loginserver-axse.onrender.com/signup', {
+                fetch('https://loginserver-axse.onrender.com/verify', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -131,11 +58,11 @@ const Signup = ({
                         else if (data.message === "Verification Code Sent to your Email") {
                             // console.log(data.udata);
                             alert(data.message);
-                            navigation.navigate('Verification', { userdata: data })
+                            navigation.navigate('Verification', { userdata: data.udata })
                         }
                         else {
                             alert(data.message);
-                           navigation.navigate('Verification', { userdata: data })
+                           navigation.navigate('Verification', { userdata: data.udata })
                             //  navigation.navigate('login')
 
                         }
@@ -146,50 +73,12 @@ const Signup = ({
                         // handle any errors here
                     });
             }
-            // else { setErrormsg('Password and Confirm Password must be same') }
+            
 
         }
     }
 
-    //     else { alert("Enter valid details"); }
-    //     }
-
-    // const [user, setUser] = useState({
-    //     Fullname: "",
-    //     email: "",
-    //     pass: "",
-    //     Repass: ""
-    // })
-
-
-    // const handleChange = e => {
-
-    //     const { name, value } = e.target
-    //     // console.log(name, value);
-    //     setUser({
-    //         ...user,
-    //         [name]: value
-    //     })
-    // }
-    // // 
-    // const register = () => {
-    //     const { Fullname, email, pass, Repass } = user
-    //     if (Fullname && email && pass && Repass) {
-    //         // alert("Data uploaded successfully")
-    //         if (pass === Repass) {
-    //             axios.post("http://localhost:8008/register", user)
-    //                 .then(res =>
-    //                     // console.log(res)
-    //                     alert(res.data.message)
-    //                 )
-    //         }
-    //         else { alert("Pasward not match") }
-
-    //     }
-
-    //     else { alert("Enter valid details"); }
-    // }
-
+   
     return (
         <View style={styles.container}>
             <Image style={styles.patternbg} source={pattern} />

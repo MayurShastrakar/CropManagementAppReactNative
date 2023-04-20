@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput ,TouchableOpacity} from 'react-native'
 import React, { useState } from 'react'
 import pattern from '../../assets/pattern.png'
 import logo from '../../assets/mainlogo.png'
@@ -48,7 +48,7 @@ const Login = ({ navigation }) => {
 
             <View style={styles.container1} >
                 <View style={styles.s1}>
-                <Image style={styles.logo} source={green} />
+                    <Image style={styles.logo} source={green} />
                     <Text style={styles.h1} onPress={() => navigation.navigate('welcome')}></Text>
                     <Text style={styles.small1}></Text>
                 </View>
@@ -83,9 +83,18 @@ const Login = ({ navigation }) => {
                     <View style={styles.fp}>
                         <Text style={link}>Forgot Password?</Text>
                     </View>
-                    <Text style={button1}
+                    {/* <Text style={button1}
                         onPress={() => Sendtobackend()}
-                    >Login</Text>
+                    >Login</Text> */}
+                    <TouchableOpacity
+                        onPress={() => {
+                            Sendtobackend();
+                        }}
+                    >
+                        <Text style={button1}
+
+                        >Login</Text>
+                    </TouchableOpacity>
                     <Text style={link2}>Don't have an account?&nbsp;
                         <Text style={link}
                             onPress={() => navigation.navigate('signup')}
@@ -115,7 +124,7 @@ const styles = StyleSheet.create({
         zIndex: -1,
     },
     container1: {
-        marginTop:40,
+        marginTop: 40,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

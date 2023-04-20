@@ -31,7 +31,6 @@ const Welcome = ({ navigation }) => {
                     onPress={() => navigation.navigate('signup')}
                 >Signup</Text>
 
-
                 <Text>To the APP</Text>
             </View>
         </View>
