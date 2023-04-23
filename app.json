@@ -1,6 +1,8 @@
 {
   "expo": {
-    "plugins": ["expo-camera"],
+    "plugins": [
+      "expo-camera"
+    ],
     "name": "FirstProject",
     "slug": "FirstProject",
     "version": "1.0.0",
@@ -16,16 +18,27 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mayurs31.FirstProject"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.mayurs31.FirstProject"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "447ff469-fcfb-40c2-8a0b-96bf27f488e8"
+      }
     }
   }
 }

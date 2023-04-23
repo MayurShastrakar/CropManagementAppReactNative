@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput,TouchableOpacity,ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import pattern from '../../assets/pattern.png'
 import green from '../../assets/green.png'
@@ -14,6 +14,7 @@ const Verification = ({ navigation, route }) => {
     const [errormsg, setErrormsg] = useState(null);
     const [userCode, setUserCode] = useState('XXXX');
     const [actualCode, setActualCode] = useState(null);
+    const [loading,setloading]=useState(false);
 
     useEffect(() => {
         setActualCode(userdata[0]?.VerificationCode);
@@ -22,13 +23,14 @@ const Verification = ({ navigation, route }) => {
     const Sendtobackend = () => {
         console.log(userCode);
         // console.log(actualCode);
-
+        
         if (userCode == 'XXXX' || userCode == '') {
             setErrormsg('Please enter the code');
             return;
         }
-
+        
         else if (userCode == actualCode) {
+            setloading(true);
             // console.log('correct code');
             const fdata = {
                 email: userdata[0]?.email,
@@ -50,11 +52,12 @@ const Verification = ({ navigation, route }) => {
                     // console.log(data);
                     if (data.message === 'User Registered Successfully') {
                         alert(data.message);
+                        setloading(false)
                         navigation.navigate('login')
                     }
                     else {
                         alert("Something went wrong !! Try Signing Up Again");
-
+                        setloading(false)
                     }
                 })
         }
@@ -98,9 +101,21 @@ const Verification = ({ navigation, route }) => {
                     <View style={styles.fp}>
                         <Text style={link}>Forgot Password?</Text>
                     </View>
-                    <Text style={button1}
+                    {/* <Text style={button1}
                         onPress={() => Sendtobackend()}
-                    >Verify</Text>
+                    >Verify</Text> */}
+                    <TouchableOpacity
+                        style={button1}
+                        activeOpacity={0.8}
+                        onPress={() => {
+                            Sendtobackend();
+
+                        }}
+                    >
+                        {!loading ? (<Text style={{ color: "white", fontSize: 22, fontWeight: 'bold' }}>Verify</Text>) : (
+                            <ActivityIndicator size="large" color="white" />
+                        )}
+                    </TouchableOpacity>
                     <Text style={link2}>Don't have an account?&nbsp;
                         <Text style={link}
                             onPress={() => navigation.navigate('signup')}

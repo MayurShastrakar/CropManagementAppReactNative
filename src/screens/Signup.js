@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity,ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import pattern from '../../assets/pattern.png'
 import logo from '../../assets/mainlogo.png'
@@ -20,9 +20,9 @@ const Signup = ({
     })
 
     const [errormsg, setErrormsg] = useState(null);
+    const [loading,setloading]=useState(false);
 
-  
-   
+
     // *******************************************************************************
 
     const register = () => {
@@ -39,6 +39,7 @@ const Signup = ({
                 return;
             }
             else {
+                setloading(true);
                 fetch('https://loginserver-axse.onrender.com/verify', {
                     method: 'POST',
                     headers: {
@@ -53,32 +54,36 @@ const Signup = ({
                         // handle the response data here
                         if (data.error === 'Invalid Credentials') {
                             // alert('Invalid Credentials')
+                            setloading(false);
                             setErrormsg('Invalid Credentials')
                         }
                         else if (data.message === "Verification Code Sent to your Email") {
                             // console.log(data.udata);
                             alert(data.message);
+                            setloading(false);
                             navigation.navigate('Verification', { userdata: data.udata })
                         }
                         else {
                             alert(data.message);
-                           navigation.navigate('Verification', { userdata: data.udata })
+                            setloading(false);
+                            navigation.navigate('Verification', { userdata: data.udata })
                             //  navigation.navigate('login')
 
                         }
                     })
                     .catch(error => {
+                        setloading(false);
                         setErrormsg('Email or name already exist');
                         console.error(error);
                         // handle any errors here
                     });
             }
-            
+
 
         }
     }
 
-   
+
     return (
         <View style={styles.container}>
             <Image style={styles.patternbg} source={pattern} />
@@ -145,14 +150,18 @@ const Signup = ({
                         />
                     </View>
 
+
                     <TouchableOpacity
+                        style={button1}
+                        activeOpacity={0.8}
                         onPress={() => {
                             register();
+
                         }}
                     >
-                        <Text style={button1}
-
-                        >Signup</Text>
+                        {!loading ? (<Text style={{ color: "white", fontSize: 22, fontWeight: 'bold' }}> Signup </Text>) : (
+                            <ActivityIndicator size="large" color="white" />
+                        )}
                     </TouchableOpacity>
                 </ScrollView>
             </View>
@@ -177,7 +186,7 @@ const styles = StyleSheet.create({
         zIndex: -1,
     },
     container1: {
-        marginTop:80,
+        marginTop: 80,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -223,21 +232,21 @@ const styles = StyleSheet.create({
         // color: '#000',
         // marginLeft: 10,
         // marginBottom: 5,
-        color: 'green',fontWeight: 'bold'
+        color: 'green', fontWeight: 'bold'
     },
     input: {
-    //  backgroundColor: "#FFB0CC",
-     backgroundColor: "green",
+        //  backgroundColor: "#FFB0CC",
+        backgroundColor: "green",
         // borderRadius: 20,
         // padding: 10,
         borderWidth: 1,
-    borderColor: 'green',
-    height: 25,
-    width:250,
-    borderRadius: 5,
-    fontSize: 10,
-    paddingLeft: 10,
-    marginBottom: 5,
+        borderColor: 'green',
+        height: 25,
+        width: 250,
+        borderRadius: 5,
+        fontSize: 10,
+        paddingLeft: 10,
+        marginBottom: 5,
     },
     fp: {
         display: 'flex',

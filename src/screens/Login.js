@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput ,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput ,TouchableOpacity, ActivityIndicator} from 'react-native'
 import React, { useState } from 'react'
 import pattern from '../../assets/pattern.png'
 import logo from '../../assets/mainlogo.png'
@@ -13,10 +13,12 @@ const Login = ({ navigation }) => {
     })
 
     const [errormsg, setErrormsg] = useState(null);
+    const [loading,setloading]=useState(false);  
 
     const Sendtobackend = () => {
         // console.log(fdata);
         if (fdata.email == '' || fdata.password == '') {
+            setloading(false)
             setErrormsg('All fields are required');
             return;
         }
@@ -33,8 +35,10 @@ const Login = ({ navigation }) => {
                         // console.log(data);
                         if (data.error) {
                             setErrormsg(data.error);
+                            setloading(false);
                         }
                         else {
+                            setloading(false);
                             alert('logged successfully');
                             navigation.navigate('Capture');
                         }
@@ -83,10 +87,8 @@ const Login = ({ navigation }) => {
                     <View style={styles.fp}>
                         <Text style={link}>Forgot Password?</Text>
                     </View>
-                    {/* <Text style={button1}
-                        onPress={() => Sendtobackend()}
-                    >Login</Text> */}
-                    <TouchableOpacity
+                   
+                    {/* <TouchableOpacity
                         onPress={() => {
                             Sendtobackend();
                         }}
@@ -94,6 +96,18 @@ const Login = ({ navigation }) => {
                         <Text style={button1}
 
                         >Login</Text>
+                    </TouchableOpacity> */}
+                    <TouchableOpacity
+                        style={button1}
+                        activeOpacity={0.8}
+                        onPress={() => {
+                            Sendtobackend();
+                             setloading(true);
+                        }}
+                    >
+                        {!loading ? (<Text style={{ color: "white", fontSize: 22, fontWeight: 'bold' }}>Login</Text>) : (
+                            <ActivityIndicator size="large" color="white" />
+                        )}
                     </TouchableOpacity>
                     <Text style={link2}>Don't have an account?&nbsp;
                         <Text style={link}
