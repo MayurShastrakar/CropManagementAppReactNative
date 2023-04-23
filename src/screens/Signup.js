@@ -159,7 +159,7 @@ const Signup = ({
 
                         }}
                     >
-                        {!loading ? (<Text style={{ color: "white", fontSize: 22, fontWeight: 'bold' }}> Signup </Text>) : (
+                        {!loading ? (<Text style={{ color: "white", fontSize: 22, fontWeight: 'bold',textAlign:"center"  }}> Signup </Text>) : (
                             <ActivityIndicator size="large" color="white" />
                         )}
                     </TouchableOpacity>

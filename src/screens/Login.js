@@ -105,7 +105,7 @@ const Login = ({ navigation }) => {
                              setloading(true);
                         }}
                     >
-                        {!loading ? (<Text style={{ color: "white", fontSize: 22, fontWeight: 'bold' }}>Login</Text>) : (
+                        {!loading ? (<Text style={{ color: "white", fontSize: 22, fontWeight: 'bold',textAlign:"center" }}>Login</Text>) : (
                             <ActivityIndicator size="large" color="white" />
                         )}
                     </TouchableOpacity>

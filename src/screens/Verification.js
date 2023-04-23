@@ -112,7 +112,7 @@ const Verification = ({ navigation, route }) => {
 
                         }}
                     >
-                        {!loading ? (<Text style={{ color: "white", fontSize: 22, fontWeight: 'bold' }}>Verify</Text>) : (
+                        {!loading ? (<Text style={{ color: "white", fontSize: 22, fontWeight: 'bold',textAlign:"center"  }}>Verify</Text>) : (
                             <ActivityIndicator size="large" color="white" />
                         )}
                     </TouchableOpacity>
